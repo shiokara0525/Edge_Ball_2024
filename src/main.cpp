@@ -48,7 +48,7 @@ void setup() {
 
 void loop() {
   int sendBuf_int[3];
-  byte sendBuf_byte[8] = {1,2,3,4,5,6,7};
+  byte sendBuf_byte[12] = {0xFF,0,0,0,0,0,0,0,0,0,0,0xAA};
   //データを格納
   sendBuf_int[1] = x;
   sendBuf_int[2] = y;
@@ -60,8 +60,12 @@ void loop() {
   sendBuf_byte[4] = byte( sendBuf_int[2] & 0xFF ); //論理和で下位側の８Bitを取り出し、バイト型に型変換をする。
   sendBuf_byte[5] = ball_g[0];
   sendBuf_byte[6] = ball_g[1];
-  sendBuf_byte[7] = 0xAA;
-  Serial1.write(sendBuf_byte,8);
+  sendBuf_byte[7] = ball_down[0];
+  sendBuf_byte[8] = ball_down[1];
+  sendBuf_byte[9] = ball_down[2];
+  sendBuf_byte[10] = ball_down[3];
+  sendBuf_byte[11] = 0xAA;
+  Serial1.write(sendBuf_byte,12);
   ball();
   ball_print();
 }
