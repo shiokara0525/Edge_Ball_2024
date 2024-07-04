@@ -67,11 +67,11 @@ void loop() {
   sendBuf_byte[11] = 0xAA;
   Serial1.write(sendBuf_byte,12);
   ball();
-  ball_print();
+  // ball_print();
 }
 
 void ball_print(){
-  Time = Timer.read_ms();
+  // Time = Timer.read_us();
   // Serial.print(" x : ");
   // Serial.print(x);
   // Serial.print(" y : ");
@@ -93,10 +93,10 @@ void ball_print(){
   //   Serial.print(ball_num[i]);
   // }
 
-  for(int i = 0; i < 4; i++){
-    Serial.print(" ");
-    Serial.print(ball_down[i]);
-  }
+  // for(int i = 0; i < 4; i++){
+  //   Serial.print(" ");
+  //   Serial.print(ball_down[i]);
+  // }
   Serial.println();
   Timer.reset();
 }
@@ -120,7 +120,7 @@ void ball() {
 // B6 B5 D7 D6 D4 D5 D0 B7 B3 B2 B1 F0 F1 F4 F5 F7 これは普通のボールのやつ
 // B4 D1 B0 F6 これは下向きのやつ
 
-  for(int i = 0; i < 100; i++){
+  for(int i = 0; i < 80; i++){
     ball_8bit[0] = PINB & _BV(6);
     ball_8bit[1] = PINB & _BV(5);
     ball_8bit[2] = PIND & _BV(7);
