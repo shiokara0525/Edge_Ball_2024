@@ -167,8 +167,8 @@ void ball() {
   }
 
   for(int i = 0; i < 16; i++){
-    if(ball_num[i] == 100){
-      ball_num[i] = 20;
+    if(ball_num[i] == 80){
+      ball_num[i] = 0;
     }
     if(best_val < ball_num[i]){
       best_val = ball_num[i];
