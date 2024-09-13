@@ -1,6 +1,7 @@
 #include <Arduino.h>
 #include<timer.h>
-#include<MA.h>
+#include<move_ave/MA.h>
+#include<Vector/myVector.h>
 
 int ballPin[16] = {10,2,14,15,16,17,18,19,11,3,4,5,6,7,8,9};
 
@@ -14,8 +15,7 @@ uint8_t ball_8bit[16];
 uint8_t ball_get_8[2];
 uint8_t ball_down_8bit[4];
 
-double Sin[16];
-double Cos[16];
+Vector2D ele[16];
 
 int16_t x,y;
 int ball_get;
@@ -41,8 +41,7 @@ void setup() {
   DDRD &= ~(_BV(7) | _BV(6) | _BV(4) | _BV(5) | _BV(0) | _BV(1));
   DDRF &= ~(_BV(0) | _BV(1) | _BV(4) | _BV(5) | _BV(7) | _BV(6));
   for(int i = 0; i < 16; i++){
-    Sin[i] = sin(radians(22.5 * i));
-    Cos[i] = cos(radians(22.5 * i));
+    ele[i].set_polar(22.5 * i, 1.0);
   }
 }
 
@@ -102,8 +101,7 @@ void ball_print(){
 }
 
 void ball() {
-  double ball_x = 0;
-  double ball_y = 0;
+  Vector2D ball_;
   ball_g[0] = 0;
   ball_g[1] = 0;
   for(int i = 0; i < 16; i++){
@@ -187,8 +185,7 @@ void ball() {
     if(ball_num[num] == 250){
       ball_num[num] = 1000;
     }
-    ball_x += ball_num[num] * Cos[num];
-    ball_y += ball_num[num] * Sin[num];
+    ball_ = ball_ + ele[num] * ball_num[num];
   }
 
   // A = ma.demandAve(ball_g[0] + ball_g[1]);
@@ -202,6 +199,6 @@ void ball() {
   else{
     ball_get = 0;
   }
-  x = ball_x;
-  y = ball_y;
+  x = ball_.return_x();
+  y = ball_.return_y();
 }
