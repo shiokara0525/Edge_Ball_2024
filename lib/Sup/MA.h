@@ -1,5 +1,5 @@
 #include<Arduino.h>
-#include<Vector\myVector.h>
+#include<myVector.h>
 #pragma once
 
 class MA{   
@@ -12,6 +12,7 @@ class MA{
         float demandAve(float);
         float sum(float);
         float returnAve();
+        float returnSum();
         void reset();
 };
 

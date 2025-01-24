@@ -1,4 +1,4 @@
-#include<Angle\angle.h>
+#include<angle.h>
 
 angle::angle(double ang,bool flag){
     if(flag == true){

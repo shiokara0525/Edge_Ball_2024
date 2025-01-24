@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include<timer.h>
-#include<move_ave/MA.h>
-#include<Vector/myVector.h>
+#include<Sup.h>
 
 int ballPin[16] = {10,2,14,15,16,17,18,19,11,3,4,5,6,7,8,9};
 
@@ -87,10 +86,10 @@ void ball_print(){
   // Serial.print(A);
   // Serial.print(" get : ");
   // Serial.print(ball_get);
-  // for(int i = 0; i < 16; i++){
-  //   Serial.print(" ");
-  //   Serial.print(ball_num[i]);
-  // }
+  for(int i = 0; i < 16; i++){
+    Serial.print(" ");
+    Serial.print(ball_num[i]);
+  }
 
   // for(int i = 0; i < 4; i++){
   //   Serial.print(" ");
@@ -165,6 +164,9 @@ void ball() {
   }
 
   for(int i = 0; i < 16; i++){
+    if(i == 14){
+      ball_num[i] *= 1.075;
+    }
     if(ball_num[i] == 80){
       ball_num[i] = 0;
     }

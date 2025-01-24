@@ -1,4 +1,4 @@
-#include<move_ave\MA.h>
+#include<MA.h>
 
 
 void MA::setLenth(int lenth){
@@ -43,6 +43,18 @@ float MA::returnAve(){
     ave /= (lenth < count ? lenth : count);
     return ave;
 }
+
+
+
+
+float MA::returnSum(){
+    float sum = 0;
+    for(int i = 0; i < lenth; i++){
+        sum += record[i];
+    }
+    count++;
+    return sum;
+} 
 
 
 
